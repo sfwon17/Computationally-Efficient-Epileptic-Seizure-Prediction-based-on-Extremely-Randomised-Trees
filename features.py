@@ -28,13 +28,6 @@ def get_data(file):
 
 
 def long_features(pat, outfile, datapath, timer):
-    # pat = 3
-    # outfile='D:/Semester 3/Research/test_download/train data'+'pat_'+str(pat)+'_long_newtest_sub.csv'
-    # file path for the new_test data
-    # f = '/mnt/am02_scratch/blang/kaggle_data/test_'+str(pat)+'_new/*mat'
-    # file path for the training and hold-out testing
-    # f = '/mnt/am02_scratch/blang/kaggle_data/CV/pat_'+str(pat)+'/train/*mat'
-    # f = 'D:/Semester 3/Research/test_download/Pat'+str(pat)+'Train/*mat'
     f = datapath + '/*mat'
 
     pat_num = pat
@@ -42,7 +35,7 @@ def long_features(pat, outfile, datapath, timer):
 
     label = [str(os.path.basename(n)) for n in ff]
     print(label)
-    # print(len(label))
+    
     output = []
     featureList = []
     mydata = []
@@ -224,11 +217,9 @@ def long_features(pat, outfile, datapath, timer):
         # mytimer.append(pd.DataFrame({'Features':outputtimer},index=featureListimer).T)
 
     welsh_df = pd.DataFrame(welsh, columns=["value"])
-    # welsh_df.to_csv('welsh.csv')
+
     trainSample = pd.concat(mydata, ignore_index=True)
-    # trainTimer = pd.concat(mytimer, ignore_index=True)
-    # trainTimer.to_csv(timer)
-    # trainSample.to_csv(outfile)
+
     return 1
 
 
