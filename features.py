@@ -12,11 +12,6 @@ import json
 import time
 
 
-# def get_data(file):
-#	matfile = sio.loadmat(file)
-#	data = (matfile['dataStruct']['data'][0,0]).T
-#	return data
-
 def get_data(file):
     try:
         matfile = sio.loadmat(file)
