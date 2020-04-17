@@ -52,33 +52,6 @@ def long_features(pat, outfile, datapath, timer):
         # outputtimer.append(pat_num)
         welsh = []
 
-        # get correlation Coef. this will be 16x16
-        # h=np.corrcoef(data)
-        # h=np.nan_to_num(h)
-        # # only want upper triangle
-        # ind = np.triu_indices(16, 1)
-        #
-        # htri = h[ind]
-        # for ii in range(np.size(htri)):
-        #         #start = time.time()
-        #         featureList.append('coef%i'%(ii))
-        #         output.append(htri[ii])
-        #         #total_time = time.time() - start
-        #         # featureListimer.append('coef%i' % (ii))
-        #         # outputtimer.append(total_time)
-        #
-        #
-        # c,v = np.linalg.eig(h)
-        # c.sort()
-        # c = np.real(c)
-        # for e in range(len(c)):
-        #         #start = time.time()
-        #         featureList.append('coef_timeEig%i'%(e))
-        #         output.append(c[e])
-        #         # total_time = time.time() - start
-        #         # featureListimer.append('coef_timeEig%i'%(e))
-        #         # outputtimer.append(total_time)
-
         for j in range(16):
             hold = spsig.decimate(data[j, :], 5, zero_phase=True)
 
