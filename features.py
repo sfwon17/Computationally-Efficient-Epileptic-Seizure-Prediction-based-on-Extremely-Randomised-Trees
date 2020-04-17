@@ -13,14 +13,9 @@ import time
 
 
 def get_data(file):
-    try:
-        matfile = sio.loadmat(file)
-        data = (matfile['data']).T
-        return data
-    except Exception:
-        print('bad file:', file)
-        return np.zeros([16, 400 * 10 * 60])
-
+    matfile = sio.loadmat(file)
+    data = (matfile['data']).T
+    return data
 
 def long_features(pat, outfile, datapath, timer):
     f = datapath + '/*mat'
