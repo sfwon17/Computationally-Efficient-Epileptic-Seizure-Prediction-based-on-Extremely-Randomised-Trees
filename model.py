@@ -53,13 +53,22 @@ data_feat = data_feat.values
 test_feat = test_feat.values
 
 # generate model using ExtraTrees
-if pat == 2:
-    clf = ExtraTreesClassifier(n_estimators=5000, random_state=0, max_depth=15, n_jobs=2,criterion='entropy', min_samples_split=7)
+if pat == 1:
+    clf = ExtraTreesClassifier(n_estimators=3000, random_state=0, max_depth=11, n_jobs=2)
+    lr = LogisticRegression()
+    rf = RandomForestClassifier(n_estimators=5000, random_state=0, max_depth=15, n_jobs=2,criterion='gini', min_samples_split=7)
+    lda=LinearDiscriminantAnalysis()
+elif pat == 2:
+    clf = ExtraTreesClassifier(n_estimators=5000, random_state=0, max_depth=15, n_jobs=2,criterion='entropy')
+    lr = LogisticRegression()
+    rf = RandomForestClassifier(n_estimators=5000, random_state=0, max_depth=15, n_jobs=2,criterion='gini', min_samples_split=7)
+    lda = LinearDiscriminantAnalysis()
 elif pat == 3:
     clf = ExtraTreesClassifier(n_estimators=4500, random_state=0, max_depth=15,criterion='entropy', n_jobs=2)
-elif pat == 1:
-    clf = ExtraTreesClassifier(n_estimators=3000, random_state=0, max_depth=11, n_jobs=2)
-
+    lr = LogisticRegression()
+    rf = RandomForestClassifier(n_estimators=4500, random_state=0, max_depth=15,criterion='gini', n_jobs=2,min_samples_split=7)
+    lda = LinearDiscriminantAnalysis()
+    
 clf.fit(data_feat, labela)
 y_pred = clf.predict_proba(test_feat)
 
