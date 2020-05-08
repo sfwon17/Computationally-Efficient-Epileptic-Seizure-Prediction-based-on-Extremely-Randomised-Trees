@@ -7,7 +7,7 @@ from sklearn import preprocessing
 import random
 from sklearn.ensemble import ExtraTreesClassifier
 import csv
-import matplotlib as plt
+#import matplotlib as plt
 import pickle
 import json
 print('yes')
