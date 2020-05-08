@@ -21,7 +21,7 @@ test2 = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_test.csv')
 data = pd.concat([data,data2], axis=1)
 test = pd.concat([test,test2], axis=1)
 print('yes')
-# clean the training data by removing nans
+## clean the training data by removing nans
 data.dropna(thresh=data.shape[1]-3, inplace=True)
 
 data.replace([np.inf, -np.inf], np.nan, inplace=True)
