@@ -10,17 +10,18 @@ import csv
 #import matplotlib as plt
 import pickle
 import json
-print('yes')
+
 settings = json.load(open('SETTINGS.json'))
 pat = settings['pat']
-data = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_short_train.csv')
-test = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_short_test.csv')
-data2 = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_train.csv')
-test2 = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_test.csv')
 
-data = data2
-test = pd.concat([test,test2], axis=1)
-print('yes')
+data = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_train.csv')
+test = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_test.csv')
+
+short_feat= list(data.columns.values)
+short_feat.remove('Unnamed: 0')
+short_feat.remove('File')
+short_feat.remove('pat')
+
 ## clean the training data by removing nans
 data.dropna(thresh=data.shape[1]-3, inplace=True)
 
@@ -30,8 +31,8 @@ test.replace([np.inf, -np.inf], np.nan, inplace=True)
 data.fillna(0, inplace=True)
 test.fillna(0, inplace=True)
 
-data_file = data2.File.values
-test_file = test2.File.values
+data_file = data.File.values
+test_file = test.File.values
 
 # get labels
 labela=[int(((str(os.path.basename(n)).split('_'))[2]).split('.')[0]) for n in data_file]
@@ -46,8 +47,14 @@ test.sort_values(['L'], inplace=True, ascending=False)
 labela = data.L.values
 labelt = test.L.values
 
-data_feat = data.drop(['File', 'pat', 'Unnamed: 0', 'L'], axis=1)
-test_feat = test.drop(['File', 'pat', 'Unnamed: 0', 'L'], axis=1)
+data_feat = data
+test_feat = test
+rows = data_feat.shape[0]
+
+###timer
+data_feat = data_feat[short_feat]
+test_feat = test_feat[short_feat]
+
 feat_names = data_feat.columns
 data_feat = data_feat.values
 test_feat = test_feat.values
