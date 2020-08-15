@@ -18,7 +18,7 @@ test = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_short_test.csv')
 data2 = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_train.csv')
 test2 = pd.read_csv(settings['feat']+'/pat_'+str(pat)+'_long_test.csv')
 
-data = pd.concat([data,data2], axis=1)
+data = data2
 test = pd.concat([test,test2], axis=1)
 print('yes')
 ## clean the training data by removing nans
@@ -30,12 +30,12 @@ test.replace([np.inf, -np.inf], np.nan, inplace=True)
 data.fillna(0, inplace=True)
 test.fillna(0, inplace=True)
 
-data_file = data.File.values
-test_file = test.File.values
+data_file = data2.File.values
+test_file = test2.File.values
 
 # get labels
-labela=[int(((str(os.path.basename(n)).split('_'))[2]).split('.')[0]) for n in data_file[:,0]]
-labelt=[int(((str(os.path.basename(n)).split('_'))[2]).split('.')[0]) for n in test_file[:,0]]
+labela=[int(((str(os.path.basename(n)).split('_'))[2]).split('.')[0]) for n in data_file]
+labelt=[int(((str(os.path.basename(n)).split('_'))[2]).split('.')[0]) for n in test_file]
 
 data['L'] = labela
 test['L'] = labelt
@@ -73,8 +73,8 @@ clf.fit(data_feat, labela)
 y_pred = clf.predict_proba(test_feat)
 
 # check hold-out set
-this_AUC = metrics.roc_auc_score(labelt, y_pred[:,1])
-print("AUC: " + str(this_AUC))
+#this_AUC = metrics.roc_auc_score(labelt, y_pred[:,1])
+#print("AUC: " + str(this_AUC))
 
 #pickle.dump(clf, open(settings['model']+'/modeldump_'+str(pat)+'_ef.pkl', 'wb'))
 
