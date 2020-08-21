@@ -209,10 +209,6 @@ def main():
 
         total_t = time.time() - starting
         print(total_t)
-    if feat['make_hold'] == 99:
-        print('hold')
-        outfile = feat['feat'] + '/pat_' + str(pat) + '_long_test.csv'
-        l = long_features(pat, outfile, feat['hold-out'], timer)
 
 
 if __name__ == "__main__":
